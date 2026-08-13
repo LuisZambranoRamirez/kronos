@@ -1,0 +1,33 @@
+package com.minerva.domain.valueObject.id;
+
+import java.util.UUID;
+
+import com.minerva.domain.entities.sale.SaleDetailId;
+import com.minerva.domain.valueObject.ValueObject;
+import com.minerva.domain.exceptions.NullValueException;
+import com.minerva.domain.exceptions.UnexpectedDomainException;
+
+public class SaleDetailIdImpl extends ValueObject<UUID> implements SaleDetailId {
+    
+    public SaleDetailIdImpl(UUID value) throws NullValueException {
+        super(value);
+    }
+
+    public static SaleDetailIdImpl generate() {
+        try {
+            return new SaleDetailIdImpl(UUID.randomUUID());
+        } catch (NullValueException e) {
+            throw new UnexpectedDomainException("Error al generar el ID de detalle de venta: " + e.getMessage(), e);
+        }
+    }
+
+    @Override
+    public String asString() {
+        return value.toString();
+    }
+
+    @Override
+    public UUID value() {
+        return value;
+    }
+}

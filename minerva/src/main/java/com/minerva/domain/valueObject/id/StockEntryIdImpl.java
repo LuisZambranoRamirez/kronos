@@ -1,0 +1,33 @@
+package com.minerva.domain.valueObject.id;
+
+import java.util.UUID;
+
+import com.minerva.domain.entities.stockEntry.StockEntryId;
+import com.minerva.domain.exceptions.NullValueException;
+import com.minerva.domain.valueObject.ValueObject;
+import com.minerva.domain.exceptions.UnexpectedDomainException;
+
+public class StockEntryIdImpl extends ValueObject<UUID> implements StockEntryId {
+    public StockEntryIdImpl(UUID value) throws NullValueException {
+        super(value);
+    }
+
+    public static StockEntryIdImpl generate() {
+        try {
+            return new StockEntryIdImpl(UUID.randomUUID());
+        } catch (NullValueException e) {
+            throw new UnexpectedDomainException("Error al generar el ID de entrada de stock: " + e.getMessage(), e);
+        }
+    }
+
+    @Override
+    public String asString() {
+        return value.toString();
+    }
+
+    @Override
+    public UUID value() {
+        return value;
+    }
+    
+}
