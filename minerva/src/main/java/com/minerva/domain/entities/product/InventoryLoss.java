@@ -5,51 +5,54 @@ import com.minerva.domain.exceptions.DomainException;
 import com.minerva.domain.exceptions.MinimumAmountException;
 import com.minerva.domain.exceptions.NullValueException;
 import com.minerva.domain.entities.Entity;
+import com.minerva.domain.valueObject.Observation;
 import com.minerva.domain.valueObject.ProductQuantity;
 import com.minerva.domain.valueObject.id.InventoryLossIdImpl;
-import com.minerva.domain.valueObject.ProductName;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 public class InventoryLoss extends Entity<InventoryLossId> {
 
-    private final ProductName productName;
+    private final ProductId productId;
     private final ProductQuantity quantity;
     private ReasonProductLoss reason;
-    private String observation;
+    private Observation observation;
     private final LocalDateTime registrationDate;
 
     public InventoryLoss(
-            ProductName productName,
+            ProductId productId,
             ProductQuantity quantity,
             ReasonProductLoss reason,
             String observation
     ) throws DomainException {
 
-        if (productName == null) throw new NullValueException("El nombre del producto no puede estar vacío.");
-        if (quantity != null && quantity.isZeroOrLess()) throw new MinimumAmountException("La cantidad debe ser mayor a cero.");
+        if (productId == null) throw new NullValueException("El nombre del producto no puede estar vacío.");
+        if (quantity == null) throw new NullValueException("La cantidad debe ser mayor a cero.");
+        if (quantity.isZeroOrLess()) throw new MinimumAmountException("La cantidad debe ser mayor a cero.");
         if (reason == null) throw new NullValueException("Debe especificar la razón de la pérdida.");
 
         super(InventoryLossIdImpl.generate());
 
-        this.productName = productName;
+        this.productId = productId;
         this.quantity = quantity;
         this.reason = reason;
-        this.observation = observation;
-        // VALORES POR DEFECTO
+        this.observation = observation == null
+                ? null
+                : new Observation(observation);
         this.registrationDate = LocalDateTime.now();
     }
 
-    public ProductName getProductName() {
-        return productName;
+    public ProductId getProductId() {
+        return productId;
     }
 
     public ProductQuantity getQuantity() {
         return quantity;
     }
 
-    public String getObservation() {
-        return observation;
+    public Optional<Observation> getObservation() {
+        return Optional.ofNullable(observation);
     }
 
     public ReasonProductLoss getReason() {

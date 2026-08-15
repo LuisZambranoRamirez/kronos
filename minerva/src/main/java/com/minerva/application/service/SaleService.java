@@ -4,7 +4,7 @@ import com.minerva.domain.constants.Permission;
 import com.minerva.domain.constants.Role;
 import com.minerva.domain.entities.product.Product;
 import com.minerva.domain.entities.product.ProductId;
-import com.minerva.domain.entities.result.Result;
+import com.minerva.domain.services.Result;
 import com.minerva.domain.repositories.ProductRepository;
 import com.minerva.domain.valueObject.ProductQuantity;
 import com.minerva.domain.valueObject.id.AllId;

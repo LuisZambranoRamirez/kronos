@@ -2,8 +2,9 @@ package com.minerva.domain.entities.customer;
 
 import com.minerva.domain.entities.Entity;
 import com.minerva.domain.exceptions.EntityRestoreException;
+import com.minerva.domain.exceptions.InvalidDomainArgumentException;
 import com.minerva.domain.valueObject.PhoneNumber;
-import com.minerva.domain.entities.result.Result;
+import com.minerva.domain.services.Result;
 import com.minerva.domain.exceptions.DomainException;
 import com.minerva.domain.valueObject.id.CustomerName;
 
@@ -17,15 +18,13 @@ public class Customer extends Entity<CustomerId> {
     // ------------
     private final LocalDateTime registrationDate;
 
-    public Customer(String name, String phoneNumber) throws DomainException {
+    public Customer(String name, String phoneNumber) throws InvalidDomainArgumentException {
         CustomerName tempId = new CustomerName(name);
         super(tempId);
-        this.customerName = tempId;
-        this.phoneNumber = (phoneNumber != null)
-                ? new PhoneNumber(phoneNumber)
-                : null;
-
-        // VALORES POR DEFECTO
+        this.customerName = new CustomerName(name);
+        if (phoneNumber != null) {
+            this.phoneNumber = new PhoneNumber(phoneNumber);
+        }
         this.registrationDate = LocalDateTime.now();
     }
 
@@ -35,7 +34,9 @@ public class Customer extends Entity<CustomerId> {
             tempId = new CustomerName(customerName);
             this.customerName = tempId;
             this.registrationDate = registrationDate;
-            this.phoneNumber = phoneNumber != null ? new PhoneNumber(phoneNumber) : null;
+            if (phoneNumber != null) {
+                this.phoneNumber = new PhoneNumber(phoneNumber);
+            }
         } catch (DomainException e) {
             throw new EntityRestoreException("Error al crear el cliente: " + e.getMessage(), e);
         }
@@ -52,13 +53,15 @@ public class Customer extends Entity<CustomerId> {
 
     public Result<Void> updatePhoneNumber(String newPhoneNumber) {
         try {
-            this.phoneNumber = (newPhoneNumber != null)
-                ? new PhoneNumber(newPhoneNumber)
-                : null;
-        } catch (DomainException e) {
+            this.phoneNumber = new PhoneNumber(newPhoneNumber);
+            return Result.success(null);
+        } catch (InvalidDomainArgumentException e) {
             return Result.fail(e.getMessage());
         }
-        return Result.success(null);
+    }
+
+    public void removePhoneNumber() {
+        this.phoneNumber = null;
     }
 
     public LocalDateTime getRegistrationDate() {

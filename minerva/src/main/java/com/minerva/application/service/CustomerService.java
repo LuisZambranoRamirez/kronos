@@ -7,7 +7,7 @@ import com.minerva.domain.constants.Permission;
 import com.minerva.domain.constants.Role;
 import com.minerva.domain.repositories.CustomerRepository;
 import com.minerva.domain.entities.customer.Customer;
-import com.minerva.domain.entities.result.Result;
+import com.minerva.domain.services.Result;
 import com.minerva.domain.repositories.UserRepository;
 import com.minerva.domain.valueObject.id.AllId;
 import com.minerva.domain.valueObject.id.CustomerName;

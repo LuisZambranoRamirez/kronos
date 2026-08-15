@@ -3,7 +3,7 @@ package com.minerva.domain.entities.product;
 import com.minerva.domain.constants.Category;
 import com.minerva.domain.constants.GainStrategy;
 import com.minerva.domain.constants.SaleType;
-import com.minerva.domain.entities.result.Result;
+import com.minerva.domain.services.Result;
 import com.minerva.domain.entities.Entity;
 import com.minerva.domain.entities.sale.ProductSale;
 import com.minerva.domain.exceptions.*;
@@ -26,7 +26,6 @@ public class Product extends Entity<ProductId> implements ProductSale {
     private ProductQuantity reorderLevel;
     private final BarCode barCode;
     //----------------------------------------------
-
     private SaleType saleType;
     private Money cost;
     private final Category category;
@@ -43,20 +42,11 @@ public class Product extends Entity<ProductId> implements ProductSale {
             Category category,
             BigDecimal purchasePrice
     ) throws DomainException {
-        super(ProductIdImpl.generate());
-        this.productName = new ProductName(productName);
-        this.stock = new ProductQuantity(initialStock);
-        this.markup = new Markup(gainAmount, gainStrategy);
-        this.saleType = saleType;
-        this.category = category;
 
-        if (gainStrategy == null) throw new NullValueException("Seleccione una estrategia de ganancia.");
         if (saleType == null) throw new NullValueException("Seleccione el tipo de venta.");
         if (category == null) throw new NullValueException("Seleccione una categoría.");
 
-        if (reorderLevel == null ) {
-            this.reorderLevel = null;
-        } else {
+        if (reorderLevel != null) {
             if (SaleType.UNIDAD.equals(saleType) && isDecimal(reorderLevel))
                 throw new DomainException("El nivel de reposición no puede ser decimal para productos vendidos por unidad.");
 
@@ -71,6 +61,12 @@ public class Product extends Entity<ProductId> implements ProductSale {
             this.barCode = new BarCode(barCode);
         }
 
+        super(ProductIdImpl.generate());
+        this.productName = new ProductName(productName);
+        this.stock = new ProductQuantity(initialStock);
+        this.markup = new Markup(gainAmount, gainStrategy);
+        this.saleType = saleType;
+        this.category = category;
         this.cost = new Money(purchasePrice);
         this.registrationDate = LocalDateTime.now();
     }

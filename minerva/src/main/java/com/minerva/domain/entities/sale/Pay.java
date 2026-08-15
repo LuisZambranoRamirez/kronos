@@ -24,17 +24,15 @@ class Pay extends Entity<PayId> {
         if (amount != null && amount.isLessThan(MIN_AMOUNT)) throw new MinimumAmountException("El MONTO debe ser mayor o igual a S/" + MIN_AMOUNT);
 
         super(PayIdImpl.generate());
-
         this.amount = amount;
         this.paymentMethod = paymentMethod;
-        // Valores por defecto
         this.registrationDate = LocalDateTime.now();
     }
 
     Pay(String payId, BigDecimal amount, PaymentMethod paymentMethod, LocalDateTime registrationDate) {
         PayIdImpl tempId;
         try {
-            tempId = PayIdImpl.fromString(payId);
+            tempId = PayIdImpl.generate();
             this.amount = new Money(amount);
             this.paymentMethod = paymentMethod;
             this.registrationDate = registrationDate;

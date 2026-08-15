@@ -21,7 +21,7 @@ import com.minerva.application.service.ProductService;
 import com.minerva.domain.constants.GainStrategy;
 import com.minerva.domain.constants.SaleType;
 import com.minerva.domain.entities.product.Product;
-import com.minerva.domain.entities.result.Result;
+import com.minerva.domain.services.Result;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;

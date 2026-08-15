@@ -29,7 +29,6 @@ class SaleDetail extends Entity<SaleDetailId> {
         SaleDetailIdImpl tempId;
         try {
             tempId = new SaleDetailIdImpl(id);
-            
             this.quantity = new ProductQuantity(quantity);
             this.unitPrice = new Money(unitPrice);
         } catch (DomainException e) {

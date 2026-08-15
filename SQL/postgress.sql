@@ -13,7 +13,7 @@ CREATE DATABASE apolo;
 
 CREATE TYPE gain_strategy AS ENUM (
     'PORCENTAJE',
-    'INCREMENTAL'
+    'RECARGO_FIJO'
 );
 
 CREATE TYPE sale_type AS ENUM (
@@ -303,6 +303,16 @@ VALUES ('anonimo', NOW());
 -- AUDITORIA 
 -- AJENO A LAS REGLAS DE NEGOCIO, EN CONSECUENCIA SE TOMARON MAS LIBERTADES CON RESPECTO AL TRATAMIENTO DE LOS DATOS
 -- ==========================
+
+CREATE TABLE exception_log (
+    id              BIGSERIAL PRIMARY KEY,
+    exception_type  TEXT NOT NULL,
+    message         TEXT,
+    cause_type      TEXT,
+    cause_message   TEXT,
+    stack_trace     TEXT,
+    occurred_at     TIMESTAMP NOT NULL
+);
 
 CREATE TABLE audit_log (
     audit_id BIGSERIAL PRIMARY KEY,

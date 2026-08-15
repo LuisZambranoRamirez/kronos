@@ -10,6 +10,7 @@ import com.minerva.domain.valueObject.id.ProductReturnIdImpl;
 
 import java.time.LocalDateTime;
 
+// Falta el id de la venta, pero creo que lo voya a cotnrolar desde la entidad sale
 class ProductReturn extends Entity<ProductReturnId> {
     private final ProductQuantity quantity;
     private final ReasonProductReturn reason;
@@ -23,7 +24,6 @@ class ProductReturn extends Entity<ProductReturnId> {
 
         this.quantity = quantity;
         this.reason = reason;
-        // DATOS INICIALES
         this.registrationDate = LocalDateTime.now();
     }
 

@@ -1,7 +1,7 @@
 package com.minerva.infrastructure.rest.controller;
 
 import com.minerva.application.service.SaleService;
-import com.minerva.domain.entities.result.Result;
+import com.minerva.domain.services.Result;
 import com.minerva.domain.entities.sale.Sale;
 
 import jakarta.validation.Valid;

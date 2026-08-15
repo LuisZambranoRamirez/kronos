@@ -153,3 +153,9 @@ public static ProductIdImpl fromString(String value) throws DomainException {
 -- crear una exepcion para los valores nulos
 
 -- borrar los docs inecesarios
+
+-- que cada clase no confie y valide los nulos y a su vez esto traera consigo un mejor mensaje
+
+-- escanear que no se este usando domain exepciont en el proyecto
+
+-- se deberia agregar una bandera para los productos que son peresibles y asi poder obligar a ingresar un fecha de caducidad

@@ -1,8 +1,10 @@
 package com.minerva.domain.entities.stockEntry;
 
-import com.minerva.domain.valueObject.ProductName;
+import com.minerva.domain.entities.product.ProductId;
+import com.minerva.domain.entities.supplier.SupplierId;
 import com.minerva.domain.valueObject.ProductQuantity;
 import com.minerva.domain.valueObject.Money;
+import com.minerva.domain.valueObject.id.ProductIdImpl;
 import com.minerva.domain.valueObject.id.SupplierName;
 import com.minerva.domain.exceptions.DomainException;
 import com.minerva.domain.exceptions.UnexpectedDomainException;
@@ -16,8 +18,8 @@ import java.util.UUID;
 
 public class StockEntry extends Entity<StockEntryId> {
 
-    private final ProductName productName;
-    private final SupplierName supplierName;
+    private final ProductId productId;
+    private final SupplierId supplierId;
     private final Money unitPrice;
     private final ProductQuantity quantity;
     // PUedes ser null
@@ -26,18 +28,19 @@ public class StockEntry extends Entity<StockEntryId> {
     private final LocalDateTime registrationDate;
 
     public StockEntry(
-            String productName,
+            UUID productId,
             String supplierName,
             BigDecimal unitPrice,
             BigDecimal quantity,
             LocalDateTime expirationDate
     ) throws DomainException {        
 
-        this.productName = new ProductName(productName);
-        this.supplierName = new SupplierName(supplierName);
+        this.productId = new ProductIdImpl(productId);
+        this.supplierId = new SupplierName(supplierName);
         this.unitPrice = new Money(unitPrice);
         this.quantity = new ProductQuantity(quantity);
-
+        this.expirationDate = expirationDate;
+        this.registrationDate = LocalDateTime.now();
         super(StockEntryIdImpl.generate());
 
         if (this.unitPrice.isZeroOrLess()) throw new DomainException("El precio del producto debe ser mayor a 0.");
@@ -45,15 +48,11 @@ public class StockEntry extends Entity<StockEntryId> {
         if (expirationDate != null &&(expirationDate.isBefore(LocalDateTime.now()) || expirationDate.isEqual(LocalDateTime.now()))) {
             throw new DomainException("La fecha de expiración debe ser posterior a la fecha actual.");
         }
-
-        this.expirationDate = expirationDate;
-
-        this.registrationDate = LocalDateTime.now();
     }
 
     public StockEntry(
             UUID stockEntryId,
-            String productName,
+            UUID productId,
             String supplierName,
             BigDecimal unitPrice,
             BigDecimal quantity,
@@ -63,8 +62,8 @@ public class StockEntry extends Entity<StockEntryId> {
         StockEntryIdImpl tempId;
         try {
             tempId = new StockEntryIdImpl(stockEntryId);
-            this.productName = new ProductName(productName);
-            this.supplierName = new SupplierName(supplierName);
+            this.productId = new ProductIdImpl(productId);
+            this.supplierId = new SupplierName(supplierName);
             this.unitPrice = new Money(unitPrice);
             this.quantity = new ProductQuantity(quantity);
             this.expirationDate = expirationDate;
@@ -74,13 +73,13 @@ public class StockEntry extends Entity<StockEntryId> {
         }
         super(tempId);
     }
-    
-    public SupplierName getSupplierName() {
-        return supplierName;
+
+    public ProductId getProductId() {
+        return productId;
     }
 
-    public ProductName getProductName() {
-        return productName;
+    public SupplierId getSupplierId() {
+        return supplierId;
     }
 
     public Money getUnitPrice() {

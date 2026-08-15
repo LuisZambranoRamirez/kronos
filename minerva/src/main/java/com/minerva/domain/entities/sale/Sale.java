@@ -3,7 +3,7 @@ package com.minerva.domain.entities.sale;
 import com.minerva.domain.valueObject.ProductQuantity;
 import com.minerva.domain.valueObject.Money;
 import com.minerva.domain.entities.product.ProductId;
-import com.minerva.domain.entities.result.Result;
+import com.minerva.domain.services.Result;
 import com.minerva.domain.exceptions.DomainException;
 import com.minerva.domain.exceptions.NullValueException;
 import com.minerva.domain.exceptions.UnexpectedDomainException;
