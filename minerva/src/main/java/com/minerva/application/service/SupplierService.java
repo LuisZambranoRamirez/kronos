@@ -11,7 +11,6 @@ import com.minerva.domain.valueObject.id.AllId;
 import com.minerva.domain.valueObject.id.SupplierName;
 import com.minerva.domain.valueObject.id.UserName;
 import com.minerva.domain.exceptions.DomainException;
-import com.minerva.domain.exceptions.UnauthorizedActionException;
 import com.minerva.domain.repositories.SupplierRepository;
 import com.minerva.domain.repositories.UserRepository;
 

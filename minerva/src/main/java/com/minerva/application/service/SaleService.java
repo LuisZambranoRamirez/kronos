@@ -11,7 +11,6 @@ import com.minerva.domain.valueObject.id.AllId;
 import com.minerva.domain.valueObject.id.CustomerName;
 import com.minerva.domain.entities.sale.Sale;
 import com.minerva.domain.exceptions.DomainException;
-import com.minerva.domain.exceptions.UnauthorizedActionException;
 import com.minerva.domain.repositories.SaleRepository;
 import com.minerva.domain.repositories.UserRepository;
 import com.minerva.domain.entities.sale.Sale.SaleItem;

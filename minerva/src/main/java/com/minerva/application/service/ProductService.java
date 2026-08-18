@@ -9,7 +9,6 @@ import com.minerva.domain.constants.SaleType;
 import com.minerva.domain.entities.product.*;
 import com.minerva.domain.services.Result;
 import com.minerva.domain.exceptions.DomainException;
-import com.minerva.domain.exceptions.UnauthorizedActionException;
 import com.minerva.domain.repositories.ProductRepository;
 import com.minerva.domain.repositories.SupplierRepository;
 import com.minerva.domain.repositories.UserRepository;

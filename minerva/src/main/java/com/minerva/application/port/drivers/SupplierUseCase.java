@@ -2,7 +2,6 @@ package com.minerva.application.port.drivers;
 
 import com.minerva.domain.services.Result;
 import com.minerva.domain.entities.supplier.Supplier;
-import com.minerva.domain.exceptions.UnauthorizedActionException;
 
 import java.util.List;
 import java.util.Optional;

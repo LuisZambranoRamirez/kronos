@@ -13,7 +13,6 @@ import com.minerva.domain.valueObject.id.AllId;
 import com.minerva.domain.valueObject.id.CustomerName;
 import com.minerva.domain.valueObject.PhoneNumber;
 import com.minerva.domain.exceptions.DomainException;
-import com.minerva.domain.exceptions.UnauthorizedActionException;
 import com.minerva.domain.valueObject.id.UserName;
 
 public class CustomerService extends Service {

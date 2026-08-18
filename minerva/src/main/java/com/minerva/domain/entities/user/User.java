@@ -23,6 +23,7 @@ public class User extends Entity<UserId> {
     private final LocalDateTime registrationDate;
 
     public User(PasswordHasher passwordHasher, String dni, String names, String lastNames, String username, String password, Role role) throws DomainException {
+        if (role == null) throw new NullValueException("El ROL no puede ser nulo.");
         UserName tempUserName = new UserName(username);
         super(tempUserName);
         this.dni = new DNI(dni);
@@ -30,11 +31,7 @@ public class User extends Entity<UserId> {
         this.lastNames = new LastName(lastNames);
         this.username = tempUserName;
         this.passwordHash = passwordHasher.hash(new Password(password));
-        if (role == null) {
-            throw new NullValueException("El ROL no puede ser nulo.");
-        } else {
-            this.role = role;
-        }
+        this.role = role;
         this.isActive = true;
         this.registrationDate = LocalDateTime.now();
     }

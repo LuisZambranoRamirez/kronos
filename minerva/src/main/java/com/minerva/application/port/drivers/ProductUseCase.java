@@ -5,7 +5,6 @@ import com.minerva.domain.constants.GainStrategy;
 import com.minerva.domain.constants.SaleType;
 import com.minerva.domain.entities.product.Product;
 import com.minerva.domain.services.Result;
-import com.minerva.domain.exceptions.UnauthorizedActionException;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
