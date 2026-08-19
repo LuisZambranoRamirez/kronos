@@ -47,8 +47,6 @@ barCode
 
 -- falta agregar el refreshToken
 
--- Separar los result en dos, uno para mensajes normales y otro para mensajes con codigo
-
 -- El AllId es solo para registrar el caso donde se hacen consultas a muchas entidades
 
 -- No deberia lanzar exepciones el service para el flujo de permisos 
@@ -149,8 +147,6 @@ public static ProductIdImpl fromString(String value) throws DomainException {
 -- pensar si es necesario que una entidad deberia conocer si un objeto el id de otro dominio o deberia conocerlo por atributo
 
 -- se deberia pasar el uuid como uuid y no hacer la transformacion a string.
-
--- crear una exepcion para los valores nulos
 
 -- borrar los docs inecesarios
 

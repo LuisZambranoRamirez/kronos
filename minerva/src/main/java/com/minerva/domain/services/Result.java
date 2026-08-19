@@ -27,6 +27,9 @@ public class Result<D> {
     }
 
     public boolean isSuccess() { return success; }
+    public ErrorType getErrorType() {
+        return errorType;
+    }
     public boolean isFail() {return !success;}
     public String getMessage() { return message; }
     public D getData() { return data; }
