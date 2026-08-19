@@ -155,3 +155,5 @@ public static ProductIdImpl fromString(String value) throws DomainException {
 -- escanear que no se este usando domain exepciont en el proyecto
 
 -- se deberia agregar una bandera para los productos que son peresibles y asi poder obligar a ingresar un fecha de caducidad
+
+-- el id deberia ser un value object osea heredar
