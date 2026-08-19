@@ -210,13 +210,17 @@ public class Product extends Entity<ProductId> implements ProductSale {
         return cost;
     }
 
-    @Override
     public Money calculatePrice() {
         try {
             return markup.apply(cost);
         } catch (InvalidDomainArgumentException e) {
             throw new UnexpectedDomainException(e.getMessage(), e);
         }
+    }
+
+    @Override
+    public Money getPrice() {
+        return calculatePrice();
     }
 
 }

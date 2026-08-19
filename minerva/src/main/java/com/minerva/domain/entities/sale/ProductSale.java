@@ -6,5 +6,5 @@ import com.minerva.domain.valueObject.Money;
 public interface ProductSale {
     ProductId getId();
     Money getCost();
-    Money calculatePrice();
+    Money getPrice();
 }

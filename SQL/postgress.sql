@@ -162,7 +162,6 @@ CREATE TABLE product (
     product_name VARCHAR(100) NOT NULL UNIQUE,
     gain_strategy gain_strategy NOT NULL,
     gain_amount NUMERIC(10,2) NOT NULL,
-    price NUMERIC(10,2) NOT NULL,
     stock NUMERIC(10,3) NOT NULL,
     reorder_level NUMERIC(10,3),
     bar_code CHAR(13) UNIQUE,
