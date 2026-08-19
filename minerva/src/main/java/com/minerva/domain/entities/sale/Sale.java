@@ -107,7 +107,7 @@ public class Sale extends Entity<SaleId> {
         Money unitPriceMoney;
 
         if (negotiatedUnitPrice == null) {
-            unitPriceMoney = productSale.calculatePrice();
+            unitPriceMoney = productSale.getPrice();
         } else {
             unitPriceMoney = new Money(negotiatedUnitPrice);
 
