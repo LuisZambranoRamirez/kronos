@@ -2,7 +2,7 @@ package com.minerva.domain.entities.sale;
 
 import com.minerva.domain.valueObject.ProductQuantity;
 import com.minerva.domain.valueObject.Money;
-import com.minerva.domain.entities.product.ProductId;
+import com.minerva.domain.valueObject.id.ProductId;
 import com.minerva.domain.services.Result;
 import com.minerva.domain.exceptions.DomainException;
 import com.minerva.domain.exceptions.NullValueException;
@@ -10,7 +10,6 @@ import com.minerva.domain.exceptions.UnexpectedDomainException;
 import com.minerva.domain.entities.Entity;
 import com.minerva.domain.constants.PaymentMethod;
 import com.minerva.domain.valueObject.id.CustomerName;
-import com.minerva.domain.valueObject.id.ProductIdImpl;
 import com.minerva.domain.valueObject.id.SaleIdImpl;
 
 import java.math.BigDecimal;
@@ -61,7 +60,7 @@ public class Sale extends Entity<SaleId> {
         try {
             if (saleDetails != null && !saleDetails.isEmpty()) {
                 for (SaleDetailDTO detailDTO : saleDetails) {
-                    ProductId productId = new ProductIdImpl(detailDTO.productId);
+                    ProductId productId = new ProductId(detailDTO.productId);
                     SaleDetail saleDetail = new SaleDetail(
                         detailDTO.saleDetailId,
                         detailDTO.quantity,
