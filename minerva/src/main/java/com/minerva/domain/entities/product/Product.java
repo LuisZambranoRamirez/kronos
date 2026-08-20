@@ -8,7 +8,7 @@ import com.minerva.domain.entities.Entity;
 import com.minerva.domain.entities.sale.ProductSale;
 import com.minerva.domain.exceptions.*;
 import com.minerva.domain.valueObject.*;
-import com.minerva.domain.valueObject.id.ProductIdImpl;
+import com.minerva.domain.valueObject.id.ProductId;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -61,7 +61,7 @@ public class Product extends Entity<ProductId> implements ProductSale {
             this.barCode = new BarCode(barCode);
         }
 
-        super(ProductIdImpl.generate());
+        super(ProductId.generate());
         this.productName = new ProductName(productName);
         this.stock = new ProductQuantity(initialStock);
         this.markup = new Markup(gainAmount, gainStrategy);
@@ -86,7 +86,7 @@ public class Product extends Entity<ProductId> implements ProductSale {
     ) {
         ProductId tempId;
         try {
-            tempId = new ProductIdImpl(productId);
+            tempId = new ProductId(productId);
             this.productName = new ProductName(productName);
             this.stock = new ProductQuantity(stock);
             this.markup = new Markup(gainAmount, gainStrategy);
