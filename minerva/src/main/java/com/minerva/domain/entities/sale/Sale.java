@@ -9,7 +9,7 @@ import com.minerva.domain.exceptions.NullValueException;
 import com.minerva.domain.exceptions.UnexpectedDomainException;
 import com.minerva.domain.entities.Entity;
 import com.minerva.domain.constants.PaymentMethod;
-import com.minerva.domain.valueObject.CustomerName;
+import com.minerva.domain.valueObject.id.CustomerName;
 import com.minerva.domain.valueObject.id.SaleIdImpl;
 
 import java.math.BigDecimal;

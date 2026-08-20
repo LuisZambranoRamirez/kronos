@@ -6,13 +6,12 @@ import com.minerva.domain.exceptions.InvalidDomainArgumentException;
 import com.minerva.domain.valueObject.PhoneNumber;
 import com.minerva.domain.services.Result;
 import com.minerva.domain.exceptions.DomainException;
-import com.minerva.domain.valueObject.id.CustomerId;
-import com.minerva.domain.valueObject.CustomerName;
+import com.minerva.domain.valueObject.id.CustomerName;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
 
-public class Customer extends Entity<CustomerId> {
+public class Customer extends Entity<CustomerName> {
     private final CustomerName customerName;
     // Puede ser null
     private PhoneNumber phoneNumber;
