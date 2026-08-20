@@ -92,7 +92,7 @@ public class Sale extends Entity<SaleId> {
 
     public record SaleDetailDTO(UUID saleDetailId, UUID productId, BigDecimal quantity, BigDecimal unitPrice) {}
 
-    public record PayDTO(String payId, BigDecimal amount, PaymentMethod paymentMethod, LocalDateTime registrationDate) {}
+    public record PayDTO(UUID payId, BigDecimal amount, PaymentMethod paymentMethod, LocalDateTime registrationDate) {}
 
     // nota: se deberia poner un minimo de ganancia sobre el costo cuando se negocia con el cliente el precio, por el momento solo se mira si es menor que el costo
     private void addDetail(
@@ -177,7 +177,7 @@ public class Sale extends Entity<SaleId> {
         List<PayDTO> paysDTO = new ArrayList<>(pays.size());
         for (Pay pay : pays) {
             paysDTO.add(new PayDTO(
-                pay.getId().toString(),
+                pay.getId().value,
                 pay.getAmount().value, 
                 pay.getPaymentMethod(), 
                 pay.getRegistrationDate()));
@@ -190,8 +190,8 @@ public class Sale extends Entity<SaleId> {
 
         saleDetails.forEach((productId, saleDetail) -> saleDetailDTOList.add(
                 new SaleDetailDTO(
-                        saleDetail.getId().value(),
-                        productId.value(),
+                        saleDetail.getId().value,
+                        productId.value,
                         saleDetail.getQuantity().value,
                         saleDetail.getUnitPrice().value)));
 
