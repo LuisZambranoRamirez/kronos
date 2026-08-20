@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import com.minerva.domain.entities.customer.CustomerId;
+import com.minerva.domain.valueObject.id.CustomerId;
 import com.minerva.domain.valueObject.id.PayId;
 import com.minerva.domain.entities.sale.SaleDetailId;
 import com.minerva.domain.entities.sale.SaleId;
