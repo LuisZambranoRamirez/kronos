@@ -49,15 +49,21 @@ public class Customer extends Entity<CustomerId> {
 
     public Result<Void> updatePhoneNumber(String newPhoneNumber) {
         try {
-            this.phoneNumber = new PhoneNumber(newPhoneNumber);
+            PhoneNumber newPhoneNumberValue = new PhoneNumber(newPhoneNumber);
+
+            if (phoneNumber.equals(newPhoneNumberValue))
+                return Result.fail("El nuevo número de teléfono es igual al actual.");
+
+            phoneNumber = newPhoneNumberValue;
             return Result.success(null);
         } catch (InvalidDomainArgumentException e) {
             return Result.fail(e.getMessage());
         }
     }
 
-    public void removePhoneNumber() {
-        this.phoneNumber = null;
+    public Result<Void> removePhoneNumber() {
+        phoneNumber = null;
+        return Result.success(null);
     }
 
     public LocalDateTime getRegistrationDate() {
