@@ -8,6 +8,7 @@ import com.minerva.domain.entities.Entity;
 import com.minerva.domain.valueObject.Observation;
 import com.minerva.domain.valueObject.ProductQuantity;
 import com.minerva.domain.valueObject.id.InventoryLossId;
+import com.minerva.domain.valueObject.id.ProductId;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
