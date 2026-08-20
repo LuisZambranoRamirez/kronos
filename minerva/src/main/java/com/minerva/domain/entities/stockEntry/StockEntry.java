@@ -1,11 +1,10 @@
 package com.minerva.domain.entities.stockEntry;
 
-import com.minerva.domain.entities.product.ProductId;
-import com.minerva.domain.entities.supplier.SupplierId;
+import com.minerva.domain.valueObject.id.ProductId;
+import com.minerva.domain.valueObject.id.SupplierId;
 import com.minerva.domain.valueObject.ProductQuantity;
 import com.minerva.domain.valueObject.Money;
-import com.minerva.domain.valueObject.id.ProductIdImpl;
-import com.minerva.domain.valueObject.id.SupplierName;
+import com.minerva.domain.valueObject.SupplierName;
 import com.minerva.domain.exceptions.DomainException;
 import com.minerva.domain.exceptions.UnexpectedDomainException;
 import com.minerva.domain.entities.Entity;
@@ -35,7 +34,7 @@ public class StockEntry extends Entity<StockEntryId> {
             LocalDateTime expirationDate
     ) throws DomainException {        
 
-        this.productId = new ProductIdImpl(productId);
+        this.productId = new ProductId(productId);
         this.supplierId = new SupplierName(supplierName);
         this.unitPrice = new Money(unitPrice);
         this.quantity = new ProductQuantity(quantity);
@@ -62,7 +61,7 @@ public class StockEntry extends Entity<StockEntryId> {
         StockEntryIdImpl tempId;
         try {
             tempId = new StockEntryIdImpl(stockEntryId);
-            this.productId = new ProductIdImpl(productId);
+            this.productId = new ProductId(productId);
             this.supplierId = new SupplierName(supplierName);
             this.unitPrice = new Money(unitPrice);
             this.quantity = new ProductQuantity(quantity);
