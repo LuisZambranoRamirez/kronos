@@ -7,7 +7,7 @@ import com.minerva.domain.exceptions.NullValueException;
 import com.minerva.domain.entities.Entity;
 import com.minerva.domain.valueObject.Observation;
 import com.minerva.domain.valueObject.ProductQuantity;
-import com.minerva.domain.valueObject.id.InventoryLossIdImpl;
+import com.minerva.domain.valueObject.id.InventoryLossId;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -32,7 +32,7 @@ public class InventoryLoss extends Entity<InventoryLossId> {
         if (quantity.isZeroOrLess()) throw new MinimumAmountException("La cantidad debe ser mayor a cero.");
         if (reason == null) throw new NullValueException("Debe especificar la razón de la pérdida.");
 
-        super(InventoryLossIdImpl.generate());
+        super(InventoryLossId.generate());
 
         this.productId = productId;
         this.quantity = quantity;
