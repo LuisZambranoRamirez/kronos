@@ -11,6 +11,7 @@ import com.minerva.domain.valueObject.id.PayId;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 class Pay extends Entity<PayId> {
     private final Money amount;
@@ -29,17 +30,17 @@ class Pay extends Entity<PayId> {
         this.registrationDate = LocalDateTime.now();
     }
 
-    Pay(String payId, BigDecimal amount, PaymentMethod paymentMethod, LocalDateTime registrationDate) {
-        PayId tempId;
+    Pay(UUID payId, BigDecimal amount, PaymentMethod paymentMethod, LocalDateTime registrationDate) {
+        PayId payIdValueObject;
         try {
-            tempId = PayId.generate();
+            payIdValueObject = new PayId(payId);
             this.amount = new Money(amount);
             this.paymentMethod = paymentMethod;
             this.registrationDate = registrationDate;
         } catch (DomainException e) {
             throw new UnexpectedDomainException("Error al crear el pago: " + e.getMessage(), e);
         }
-        super(tempId);
+        super(payIdValueObject);
     }
 
     public Money getAmount() {
