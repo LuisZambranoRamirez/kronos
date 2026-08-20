@@ -11,6 +11,11 @@ public class Name extends ValueObject<String> {
         validate(value, MIN_LENGTH, MAX_LENGTH);
     }
 
+    @Override
+    public String toString() {
+        return value;
+    }
+
     public Name(String value, int minLength, int maxLength) throws InvalidDomainArgumentException {
         super(value);
         validate(value, minLength, maxLength);
