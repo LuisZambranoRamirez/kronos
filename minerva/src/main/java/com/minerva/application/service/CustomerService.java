@@ -3,38 +3,32 @@ package com.minerva.application.service;
 import java.util.List;
 import java.util.Optional;
 
-import com.minerva.domain.constants.Permission;
-import com.minerva.domain.constants.Role;
+import com.minerva.domain.entities.customer.CustomerId;
 import com.minerva.domain.repositories.CustomerRepository;
 import com.minerva.domain.entities.customer.Customer;
 import com.minerva.domain.services.Result;
-import com.minerva.domain.repositories.UserRepository;
-import com.minerva.domain.valueObject.id.AllId;
 import com.minerva.domain.valueObject.id.CustomerName;
 import com.minerva.domain.valueObject.PhoneNumber;
 import com.minerva.domain.exceptions.DomainException;
-import com.minerva.domain.valueObject.id.UserName;
 
-public class CustomerService extends Service {
+public class CustomerService {
     private final CustomerRepository customerRepository;
 
-    public CustomerService(Role userRole, UserName userName, UserRepository userRepository, CustomerRepository customerRepository) {
-        super(userRole, userName, userRepository);
+    public CustomerService(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
     }
 
     // --------------------- WRITE ---------------------
-    public Result<Void> registerCustomer(String customerName, String phoneNumber) throws UnauthorizedActionException {
-        if (getUserRole().lacksPermission(Permission.CUSTOMER_REGISTER)) 
-            throw new UnauthorizedActionException("El usuario no tiene permiso para registrar clientes.");
-        
-        Customer customerCreated;
+    public Result<Void> registerCustomer(String customerName, String phoneNumber) {
         try {
-            customerCreated = new Customer(customerName, phoneNumber);
-            if (customerRepository.existsById(customerCreated.getCustomerName()))
+            Customer customerCreated = new Customer(customerName, phoneNumber);
+
+            if (customerRepository.existsById(customerCreated.getId()))
                 return Result.fail("Ya existe un cliente con el mismo nombre.");
 
-            if (customerCreated.getPhoneNumber().isPresent() && customerRepository.existsByPhoneNumber(customerCreated.getPhoneNumber().get()))
+            if (customerCreated.getPhoneNumber().isPresent() &&
+                customerRepository.existsByPhoneNumber(customerCreated.getPhoneNumber().get())
+            )
                 return Result.fail("Ya existe un cliente con el mismo número de teléfono.");
 
             customerRepository.save(customerCreated);
@@ -42,14 +36,10 @@ public class CustomerService extends Service {
             return Result.fail(e.getMessage());
         }
 
-        registerUserAction(Permission.CUSTOMER_REGISTER, customerCreated.getId());
         return Result.success(null);
     }
 
-    public Result<Void> updatePhoneNumber(String customerId, String newPhoneNumber) throws UnauthorizedActionException {
-        if (getUserRole().lacksPermission(Permission.CUSTOMER_UPDATE_PHONE_NUMBER)) 
-            throw new UnauthorizedActionException("El usuario no tiene permiso para actualizar el número de teléfono del cliente.");
-
+    public Result<Void> updatePhoneNumber(String customerId, String newPhoneNumber) {
         try {
             Optional<Customer> customerOpt = customerRepository.findById(new CustomerName(customerId));
 
@@ -64,48 +54,32 @@ public class CustomerService extends Service {
                 return Result.fail("Ya existe un cliente con el mismo número de teléfono.");
 
             customerRepository.save(customer);  
-            registerUserAction(Permission.CUSTOMER_UPDATE_PHONE_NUMBER, customer.getId()); 
-            return Result.success(null);         
+            return Result.success(null);
         } catch (DomainException e) {
             return Result.fail("Cliente no encontrado.");
         }
     }
 
     // --------------------- READ ---------------------
-    public Optional<Customer> findCustomerById(String customerId) throws UnauthorizedActionException {
-        if (getUserRole().lacksPermission(Permission.CUSTOMER_FIND_BY_ID)) 
-            throw new UnauthorizedActionException("El usuario no tiene permiso para buscar clientes por ID.");
-        
+    public Optional<Customer> findCustomerById(String customerId) {
         try {
-            CustomerName customerName = new CustomerName(customerId);
-            registerUserAction(Permission.CUSTOMER_FIND_BY_ID, customerName);
-            return customerRepository.findById(customerName);
+            CustomerId id = new CustomerName(customerId);
+            return customerRepository.findById(id);
         } catch (DomainException e) {
             return Optional.empty();
         }
     }
 
-    public Optional<Customer> findCustomerByPhoneNumber(String phoneNumber) throws UnauthorizedActionException {
-        if (getUserRole().lacksPermission(Permission.CUSTOMER_FIND_BY_PHONE_NUMBER)) 
-            throw new UnauthorizedActionException("El usuario no tiene permiso para buscar clientes por número de teléfono.");
-
+    public Optional<Customer> findCustomerByPhoneNumber(String phoneNumber) {
         try {            
-            return customerRepository.findByPhoneNumber(new PhoneNumber(phoneNumber)).map(customer -> {
-                registerUserAction(Permission.CUSTOMER_FIND_BY_PHONE_NUMBER, customer.getId());
-                return customer;
-            });
+            return customerRepository.findByPhoneNumber(new PhoneNumber(phoneNumber));
         } catch (DomainException e) {
             return Optional.empty();
         }
     }
 
-    public List<Customer> getAllCustomers() throws UnauthorizedActionException {
-        if (getUserRole().lacksPermission(Permission.CUSTOMER_GET_ALL)) 
-            throw new UnauthorizedActionException("El usuario no tiene permiso para obtener todos los clientes.");
-        
-        List<Customer> customers = customerRepository.findAll();
-        registerUserAction(Permission.CUSTOMER_GET_ALL, new AllId());
-        return customers;
+    public List<Customer> getAllCustomers() {
+        return customerRepository.findAll();
     }
 
 }

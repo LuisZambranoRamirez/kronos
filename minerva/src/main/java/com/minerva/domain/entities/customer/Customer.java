@@ -18,29 +18,25 @@ public class Customer extends Entity<CustomerId> {
     // ------------
     private final LocalDateTime registrationDate;
 
-    public Customer(String name, String phoneNumber) throws InvalidDomainArgumentException {
-        CustomerName tempId = new CustomerName(name);
-        super(tempId);
-        this.customerName = new CustomerName(name);
-        if (phoneNumber != null) {
-            this.phoneNumber = new PhoneNumber(phoneNumber);
-        }
+    public Customer(String customerName, String phoneNumber) throws InvalidDomainArgumentException {
+        CustomerName customerNameValue = new CustomerName(customerName);
+        super(customerNameValue);
+        this.customerName = customerNameValue;
+        if (phoneNumber != null) this.phoneNumber = new PhoneNumber(phoneNumber);
         this.registrationDate = LocalDateTime.now();
     }
 
     public Customer(String customerName, LocalDateTime registrationDate, String phoneNumber) {
-        CustomerName tempId;
+        CustomerName customerNameValue;
         try {
-            tempId = new CustomerName(customerName);
-            this.customerName = tempId;
+            customerNameValue = new CustomerName(customerName);
+            this.customerName = customerNameValue;
             this.registrationDate = registrationDate;
-            if (phoneNumber != null) {
-                this.phoneNumber = new PhoneNumber(phoneNumber);
-            }
+            if (phoneNumber != null) this.phoneNumber = new PhoneNumber(phoneNumber);
         } catch (DomainException e) {
             throw new EntityRestoreException("Error al crear el cliente: " + e.getMessage(), e);
         }
-        super(tempId);
+        super(customerNameValue);
     }
 
     public CustomerName getCustomerName() {
