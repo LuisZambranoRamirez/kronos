@@ -7,7 +7,6 @@ import com.minerva.domain.entities.product.ProductId;
 import com.minerva.domain.services.Result;
 import com.minerva.domain.repositories.ProductRepository;
 import com.minerva.domain.valueObject.ProductQuantity;
-import com.minerva.domain.valueObject.id.AllId;
 import com.minerva.domain.valueObject.id.CustomerName;
 import com.minerva.domain.entities.sale.Sale;
 import com.minerva.domain.exceptions.DomainException;
