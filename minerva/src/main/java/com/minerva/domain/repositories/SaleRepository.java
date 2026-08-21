@@ -1,7 +1,8 @@
 package com.minerva.domain.repositories;
 
+import com.minerva.domain.entities.customer.CustomerId;
 import com.minerva.domain.entities.product.Product;
-import com.minerva.domain.valueObject.id.PayId;
+import com.minerva.domain.entities.sale.PayId;
 import com.minerva.domain.entities.sale.SaleDetailId;
 import com.minerva.domain.entities.sale.SaleId;
 import com.minerva.domain.entities.sale.Sale;

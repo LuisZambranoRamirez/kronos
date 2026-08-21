@@ -7,8 +7,7 @@ import com.minerva.domain.services.Result;
 import com.minerva.domain.exceptions.DomainException;
 import com.minerva.domain.entities.Entity;
 import com.minerva.domain.valueObject.RUC;
-import com.minerva.domain.valueObject.id.SupplierId;
-import com.minerva.domain.valueObject.SupplierName;
+import com.minerva.domain.valueObject.id.SupplierName;
 
 import java.time.LocalDateTime;
 import java.util.Optional;

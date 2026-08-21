@@ -2,7 +2,7 @@ package com.minerva.domain.entities.sale;
 
 import com.minerva.domain.valueObject.ProductQuantity;
 import com.minerva.domain.valueObject.Money;
-import com.minerva.domain.valueObject.id.ProductId;
+import com.minerva.domain.entities.product.ProductId;
 import com.minerva.domain.services.Result;
 import com.minerva.domain.exceptions.DomainException;
 import com.minerva.domain.exceptions.NullValueException;
@@ -10,6 +10,7 @@ import com.minerva.domain.exceptions.UnexpectedDomainException;
 import com.minerva.domain.entities.Entity;
 import com.minerva.domain.constants.PaymentMethod;
 import com.minerva.domain.valueObject.id.CustomerName;
+import com.minerva.domain.valueObject.id.ProductIdImpl;
 import com.minerva.domain.valueObject.id.SaleIdImpl;
 
 import java.math.BigDecimal;
@@ -60,7 +61,7 @@ public class Sale extends Entity<SaleId> {
         try {
             if (saleDetails != null && !saleDetails.isEmpty()) {
                 for (SaleDetailDTO detailDTO : saleDetails) {
-                    ProductId productId = new ProductId(detailDTO.productId);
+                    ProductId productId = new ProductIdImpl(detailDTO.productId);
                     SaleDetail saleDetail = new SaleDetail(
                         detailDTO.saleDetailId,
                         detailDTO.quantity,
@@ -91,7 +92,7 @@ public class Sale extends Entity<SaleId> {
 
     public record SaleDetailDTO(UUID saleDetailId, UUID productId, BigDecimal quantity, BigDecimal unitPrice) {}
 
-    public record PayDTO(UUID payId, BigDecimal amount, PaymentMethod paymentMethod, LocalDateTime registrationDate) {}
+    public record PayDTO(String payId, BigDecimal amount, PaymentMethod paymentMethod, LocalDateTime registrationDate) {}
 
     // nota: se deberia poner un minimo de ganancia sobre el costo cuando se negocia con el cliente el precio, por el momento solo se mira si es menor que el costo
     private void addDetail(
@@ -176,7 +177,7 @@ public class Sale extends Entity<SaleId> {
         List<PayDTO> paysDTO = new ArrayList<>(pays.size());
         for (Pay pay : pays) {
             paysDTO.add(new PayDTO(
-                pay.getId().value,
+                pay.getId().toString(),
                 pay.getAmount().value, 
                 pay.getPaymentMethod(), 
                 pay.getRegistrationDate()));
@@ -189,8 +190,8 @@ public class Sale extends Entity<SaleId> {
 
         saleDetails.forEach((productId, saleDetail) -> saleDetailDTOList.add(
                 new SaleDetailDTO(
-                        saleDetail.getId().value,
-                        productId.value,
+                        saleDetail.getId().value(),
+                        productId.value(),
                         saleDetail.getQuantity().value,
                         saleDetail.getUnitPrice().value)));
 

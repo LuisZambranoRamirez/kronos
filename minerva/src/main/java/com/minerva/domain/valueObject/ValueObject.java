@@ -23,7 +23,4 @@ public abstract class ValueObject<V> {
     public int hashCode() {
         return Objects.hashCode(value);
     }
-
-    @Override
-    public abstract String toString();
 }

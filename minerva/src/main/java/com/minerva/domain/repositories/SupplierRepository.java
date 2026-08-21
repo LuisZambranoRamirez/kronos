@@ -1,6 +1,6 @@
 package com.minerva.domain.repositories;
 
-import com.minerva.domain.valueObject.id.SupplierId;
+import com.minerva.domain.entities.supplier.SupplierId;
 import com.minerva.domain.valueObject.PhoneNumber;
 import com.minerva.domain.valueObject.RUC;
 import com.minerva.domain.entities.supplier.Supplier;

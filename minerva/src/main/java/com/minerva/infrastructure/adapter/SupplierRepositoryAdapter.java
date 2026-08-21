@@ -3,7 +3,7 @@ package com.minerva.infrastructure.adapter;
 import java.util.List;
 import java.util.Optional;
 
-import com.minerva.domain.valueObject.id.SupplierId;
+import com.minerva.domain.entities.supplier.SupplierId;
 import com.minerva.domain.valueObject.PhoneNumber;
 import com.minerva.domain.valueObject.RUC;
 import com.minerva.domain.entities.supplier.Supplier;

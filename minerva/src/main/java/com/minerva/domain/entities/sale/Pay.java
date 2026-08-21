@@ -7,11 +7,10 @@ import com.minerva.domain.exceptions.MinimumAmountException;
 import com.minerva.domain.exceptions.NullValueException;
 import com.minerva.domain.exceptions.UnexpectedDomainException;
 import com.minerva.domain.entities.Entity;
-import com.minerva.domain.valueObject.id.PayId;
+import com.minerva.domain.valueObject.id.PayIdImpl;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 class Pay extends Entity<PayId> {
     private final Money amount;
@@ -24,23 +23,23 @@ class Pay extends Entity<PayId> {
         if (paymentMethod == null) throw new NullValueException("El método de pago no puede estar vacío.");
         if (amount != null && amount.isLessThan(MIN_AMOUNT)) throw new MinimumAmountException("El MONTO debe ser mayor o igual a S/" + MIN_AMOUNT);
 
-        super(PayId.generate());
+        super(PayIdImpl.generate());
         this.amount = amount;
         this.paymentMethod = paymentMethod;
         this.registrationDate = LocalDateTime.now();
     }
 
-    Pay(UUID payId, BigDecimal amount, PaymentMethod paymentMethod, LocalDateTime registrationDate) {
-        PayId payIdValueObject;
+    Pay(String payId, BigDecimal amount, PaymentMethod paymentMethod, LocalDateTime registrationDate) {
+        PayIdImpl tempId;
         try {
-            payIdValueObject = new PayId(payId);
+            tempId = PayIdImpl.generate();
             this.amount = new Money(amount);
             this.paymentMethod = paymentMethod;
             this.registrationDate = registrationDate;
         } catch (DomainException e) {
             throw new UnexpectedDomainException("Error al crear el pago: " + e.getMessage(), e);
         }
-        super(payIdValueObject);
+        super(tempId);
     }
 
     public Money getAmount() {

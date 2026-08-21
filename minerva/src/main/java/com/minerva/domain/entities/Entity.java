@@ -13,6 +13,11 @@ public abstract class Entity<I extends Id<?>> {
         this.id = id;
     }
 
+    // Ojo, no se si esto da el nombrte de la clase abstracta o el nombre de la que la implemente
+    public String getEntityName() {
+        return getClass().getSimpleName();
+    }
+
     public I getId() {
         return id;
     }

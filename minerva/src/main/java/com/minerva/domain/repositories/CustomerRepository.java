@@ -2,6 +2,7 @@ package com.minerva.domain.repositories;
 
 
 import com.minerva.domain.entities.customer.Customer;
+import com.minerva.domain.entities.customer.CustomerId;
 import com.minerva.domain.valueObject.PhoneNumber;
 
 import java.util.List;

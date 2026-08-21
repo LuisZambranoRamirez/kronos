@@ -131,6 +131,19 @@ sin UNIQUE.
 
 -- cambiar el tamano de la contrsean en el sql para que se adapte a lo generado
 
+-- pensar un mejor nombre para productimpl, la palabra impl lo hace ver feo xd
+
+-- esto no tiene sentido, atrapar un expection que la documetacion indica que no saldra
+public static ProductIdImpl fromString(String value) throws DomainException {
+    try {
+        return new ProductIdImpl(UUID.fromString(value));
+    } catch (IllegalArgumentException e) {
+        throw new DomainException("El ID de product no tiene un formato válido: " + value);
+    } catch (Exception e) {
+        throw new UnexpectedDomainException(e.getMessage(), e);
+    }
+}
+
 -- pensar si es necesario que una entidad deberia conocer si un objeto el id de otro dominio o deberia conocerlo por atributo
 
 -- se deberia pasar el uuid como uuid y no hacer la transformacion a string.
@@ -144,5 +157,3 @@ sin UNIQUE.
 -- se deberia agregar una bandera para los productos que son peresibles y asi poder obligar a ingresar un fecha de caducidad
 
 -- el id deberia ser un value object osea heredar
-
--- revisar los dto de pay, porque creo que deberia haber una de lectura y otro de escritura, una recibe datos crudos (para la creacion) y otro lo valueobjects para su lectura

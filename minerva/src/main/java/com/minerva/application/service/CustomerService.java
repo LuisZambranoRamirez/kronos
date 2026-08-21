@@ -3,6 +3,7 @@ package com.minerva.application.service;
 import java.util.List;
 import java.util.Optional;
 
+import com.minerva.domain.entities.customer.CustomerId;
 import com.minerva.domain.repositories.CustomerRepository;
 import com.minerva.domain.entities.customer.Customer;
 import com.minerva.domain.services.Result;

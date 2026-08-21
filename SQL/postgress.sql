@@ -120,7 +120,8 @@ CREATE TYPE return_reason AS ENUM (
 CREATE TABLE app_user (
     user_name VARCHAR(30) PRIMARY KEY,
     dni CHAR(8) UNIQUE NOT NULL,
-    full_name VARCHAR(100) NOT NULL,
+    names VARCHAR(50) NOT NULL,
+    last_names VARCHAR(50) NOT NULL,
     password VARCHAR(255) NOT NULL,
     role_name role NOT NULL,
     is_active BOOLEAN NOT NULL,

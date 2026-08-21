@@ -14,19 +14,21 @@ import com.minerva.domain.valueObject.id.UserName;
 
 public class User extends Entity<UserId> {
     private final DNI dni;
-    private FullName fullName;
+    private Name names;
+    private LastName lastNames;
     private final UserName username;
     private PasswordHash passwordHash;
     private Role role;
     private boolean isActive;
     private final LocalDateTime registrationDate;
 
-    public User(PasswordHasher passwordHasher, String dni, String fullName, String username, String password, Role role) throws DomainException {
+    public User(PasswordHasher passwordHasher, String dni, String names, String lastNames, String username, String password, Role role) throws DomainException {
         if (role == null) throw new NullValueException("El ROL no puede ser nulo.");
         UserName tempUserName = new UserName(username);
         super(tempUserName);
         this.dni = new DNI(dni);
-        this.fullName = new FullName(fullName);
+        this.names = new Name(names);
+        this.lastNames = new LastName(lastNames);
         this.username = tempUserName;
         this.passwordHash = passwordHasher.hash(new Password(password));
         this.role = role;
@@ -34,13 +36,14 @@ public class User extends Entity<UserId> {
         this.registrationDate = LocalDateTime.now();
     }
 
-    public User(String dni, String fullName, String username, String password, Role role, boolean isActive, LocalDateTime registrationDate) {
+    public User(String dni, String names, String lastNames, String username, String password, Role role, boolean isActive, LocalDateTime registrationDate) {
         UserName tempUserName;
         try {
             tempUserName = new UserName(username);
             this.dni = new DNI(dni);
             this.username = tempUserName;
-            this.fullName = new FullName(fullName);
+            this.names = new Name(names);
+            this.lastNames = new LastName(lastNames);
             this.passwordHash = new PasswordHash(password);
             this.role = role;
             this.isActive = isActive;
@@ -55,8 +58,12 @@ public class User extends Entity<UserId> {
         return dni;
     }
 
-    public FullName getFullName() {
-        return fullName;
+    public Name getNames() {
+        return names;
+    }
+
+    public LastName getLastNames() {
+        return lastNames;
     }
 
     public PasswordHash getPasswordHash() {
