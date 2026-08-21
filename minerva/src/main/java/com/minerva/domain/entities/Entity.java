@@ -1,6 +1,6 @@
 package com.minerva.domain.entities;
 
-import com.minerva.domain.entities.userAction.Value;
+import com.minerva.domain.entities.userAction.Attribute;
 import com.minerva.domain.exceptions.UnexpectedDomainException;
 import com.minerva.domain.valueObject.id.Id;
 
@@ -19,8 +19,8 @@ public abstract class Entity<I extends Id<?>> {
     public String getEntityName() {
         return getClass().getSimpleName();
     }
-    
-    public abstract Map<String, Value<?>> getAttributes();
+
+    public abstract Map<String, Attribute<?>> getAttributes();
 
     public I getId() {
         return id;
