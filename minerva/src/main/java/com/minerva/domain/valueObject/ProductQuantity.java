@@ -29,34 +29,34 @@ public class ProductQuantity extends ValueObject<BigDecimal> {
     }
 
     public boolean isGreaterThanZero() {
-        return value.compareTo(BigDecimal.ZERO) > 0;
+        return getValue().compareTo(BigDecimal.ZERO) > 0;
     }
 
     public boolean isLessThanZero() {
-        return value.compareTo(BigDecimal.ZERO) < 0;
+        return getValue().compareTo(BigDecimal.ZERO) < 0;
     }
 
     public boolean isZero() {
-        return value.compareTo(BigDecimal.ZERO) == 0;
+        return getValue().compareTo(BigDecimal.ZERO) == 0;
     }
 
     public boolean isZeroOrLess() {
-        return value.compareTo(BigDecimal.ZERO) <= 0;
+        return getValue().compareTo(BigDecimal.ZERO) <= 0;
     }
 
 // --------------------- COMPARACIONES ---------------------BORRAR SI NO TIENE USO
 
     public boolean isGreaterThan(ProductQuantity other) {
-        return this.value.compareTo(other.value) > 0;
+        return getValue().compareTo(other.getValue()) > 0;
     }
 
     public boolean isLessThan(ProductQuantity other) {
-        return this.value.compareTo(other.value) < 0;
+        return getValue().compareTo(other.getValue()) < 0;
     }
 
     public ProductQuantity add(ProductQuantity other) {
         try {
-            return new ProductQuantity(this.value.add(other.value));
+            return new ProductQuantity(getValue().add(other.getValue()));
         } catch (InvalidDomainArgumentException e) {
             // Si esto truena, récenle al de arriba
             throw new UnexpectedDomainException("Error al sumar cantidades de producto: " + e.getMessage(), e);
@@ -65,7 +65,7 @@ public class ProductQuantity extends ValueObject<BigDecimal> {
 
     public ProductQuantity subtract(ProductQuantity other) throws MinimumAmountException {
         try {
-            return new ProductQuantity(this.value.subtract(other.value));
+            return new ProductQuantity(getValue().subtract(other.getValue()));
         } catch (MinimumAmountException e) {
             throw e;
         } catch (InvalidDomainArgumentException e) {
@@ -75,11 +75,11 @@ public class ProductQuantity extends ValueObject<BigDecimal> {
     }
 
     public boolean isDecimal() {
-        return value.scale() > 0;
+        return getValue().scale() > 0;
     }
 
     public boolean isInteger() {
-        return value.scale() == 0;
+        return getValue().scale() == 0;
     }
 
 }

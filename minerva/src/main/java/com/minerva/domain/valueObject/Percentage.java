@@ -35,7 +35,7 @@ public class Percentage extends ValueObject<BigDecimal> {
      */
     public BigDecimal calculatePercentageOf(BigDecimal value) {
         return value
-                .multiply(this.value)
+                .multiply(getValue())
                 .divide(BigDecimal.valueOf(100), value.scale(), RoundingMode.HALF_UP);
     }
 

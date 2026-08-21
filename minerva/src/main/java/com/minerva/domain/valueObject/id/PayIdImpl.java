@@ -22,13 +22,7 @@ public class PayIdImpl extends ValueObject<UUID> implements PayId {
     }
 
     @Override
-    public String asString() {
-        return value.toString();
+    public UUID getIdValue() {
+        return getValue();
     }
-
-    @Override
-    public UUID value() {
-        return value;
-    }
-    
 }

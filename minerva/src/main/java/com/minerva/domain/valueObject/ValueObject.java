@@ -5,11 +5,15 @@ import java.util.Objects;
 import com.minerva.domain.exceptions.NullValueException;
 
 public abstract class ValueObject<V> {
-    public final V value;
+    private final V value;
 
     public ValueObject(V value) throws NullValueException {
         if (value == null) throw new NullValueException("El valor no puede ser nulo.");
         this.value = value;
+    }
+
+    public V getValue() {
+        return value;
     }
 
     @Override

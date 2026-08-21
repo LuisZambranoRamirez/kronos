@@ -19,8 +19,8 @@ public class Markup extends ValueObject<BigDecimal> {
 
     public Money apply(Money cost) throws InvalidDomainArgumentException {
         return switch (gainStrategy) {
-            case RECARGO_FIJO -> cost.add(new Money(value));
-            case PORCENTAJE -> cost.incrementPercentage(value);
+            case RECARGO_FIJO -> cost.add(new Money(getValue()));
+            case PORCENTAJE -> cost.incrementPercentage(getValue());
         };
     }
 

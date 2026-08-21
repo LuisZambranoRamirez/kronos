@@ -30,36 +30,36 @@ public final class Money extends ValueObject<BigDecimal> {
     }
 
     public boolean isGreaterThanZero() {
-        return value.compareTo(BigDecimal.ZERO) > 0;
+        return getValue().compareTo(BigDecimal.ZERO) > 0;
     }
 
     public boolean isLessThanZero() {
-        return value.compareTo(BigDecimal.ZERO) < 0;
+        return getValue().compareTo(BigDecimal.ZERO) < 0;
     }
 
     public boolean isZero() {
-        return value.compareTo(BigDecimal.ZERO) == 0;
+        return getValue().compareTo(BigDecimal.ZERO) == 0;
     }
 
     public boolean isZeroOrLess() {
-        return value.compareTo(BigDecimal.ZERO) <= 0;
+        return getValue().compareTo(BigDecimal.ZERO) <= 0;
     }
 
     public boolean isZeroOrGreater() {
-        return value.compareTo(BigDecimal.ZERO) >= 0;
+        return getValue().compareTo(BigDecimal.ZERO) >= 0;
     }
 
     public boolean isLessThan(Money other) {
-        return this.value.compareTo(other.value) < 0;
+        return getValue().compareTo(other.getValue()) < 0;
     }
 
     public boolean isGreaterThan(Money other) {
-        return this.value.compareTo(other.value) > 0;
+        return getValue().compareTo(other.getValue()) > 0;
     }
 
     public Money add(Money other) {
         try {
-            return new Money(this.value.add(other.value));
+            return new Money(getValue().add(other.getValue()));
         } catch (InvalidDomainArgumentException e) {
             // Si esto truena, recenle al de arriba
             throw new UnexpectedDomainException("Error al sumar montos: " + e.getMessage(), e);
@@ -68,7 +68,7 @@ public final class Money extends ValueObject<BigDecimal> {
 
     public Money subtract(Money other) throws MinimumAmountException {
         try {
-            return new Money(this.value.subtract(other.value));
+            return new Money(getValue().subtract(other.getValue()));
         } catch (MinimumAmountException e) {
             throw e;
         } catch (InvalidDomainArgumentException e) {
@@ -90,8 +90,8 @@ public final class Money extends ValueObject<BigDecimal> {
     public Money incrementPercentage(BigDecimal percentage) throws InvalidDomainArgumentException {
         Percentage percentageVo = new Percentage(percentage);
 
-        BigDecimal percentageAmount = percentageVo.calculatePercentageOf(this.value);
-        BigDecimal newAmount = this.value
+        BigDecimal percentageAmount = percentageVo.calculatePercentageOf(getValue());
+        BigDecimal newAmount = getValue()
                 .add(percentageAmount)
                 .setScale(MAX_DECIMALS, RoundingMode.HALF_UP);
 

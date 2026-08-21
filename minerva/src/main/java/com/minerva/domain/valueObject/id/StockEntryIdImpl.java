@@ -21,13 +21,7 @@ public class StockEntryIdImpl extends ValueObject<UUID> implements StockEntryId 
     }
 
     @Override
-    public String asString() {
-        return value.toString();
-    }
-
-    @Override
-    public UUID value() {
-        return value;
-    }
-    
+    public UUID getIdValue() {
+        return getValue();
+    }    
 }

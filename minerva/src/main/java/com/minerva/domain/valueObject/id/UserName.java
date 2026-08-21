@@ -19,12 +19,7 @@ public final class UserName extends ValueObject<String> implements UserId {
     }
 
     @Override
-    public String value() {
-        return value;
-    }
-
-    @Override
-    public String asString() {
-        return value;
+    public String getIdValue() {
+        return getValue();
     }
 }

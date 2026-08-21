@@ -24,13 +24,7 @@ public class ProductIdImpl extends ValueObject<UUID>  implements ProductId {
     }
 
     @Override
-    public String asString() {
-        return value.toString();
+    public UUID getIdValue() {
+        return getValue();
     }
-
-    @Override
-    public UUID value() {
-        return value;
-    }
-
 }

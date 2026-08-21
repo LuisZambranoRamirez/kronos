@@ -22,12 +22,7 @@ public class ProductReturnIdImpl extends ValueObject<UUID> implements ProductRet
     }
 
     @Override
-    public String asString() {
-        return value.toString();
-    }
-
-    @Override
-    public UUID value() {
-        return value;
+    public UUID getIdValue() {
+        return getValue();
     }
 }
