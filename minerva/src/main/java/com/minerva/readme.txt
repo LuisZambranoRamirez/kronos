@@ -49,63 +49,9 @@ barCode
 
 -- El AllId es solo para registrar el caso donde se hacen consultas a muchas entidades
 
--- No deberia lanzar exepciones el service para el flujo de permisos 
-    public enum DomainError {
-        UNAUTHORIZED
-    }
-
-        // Nota: chat gpt recomienda usar la palbra fuilure en vez de fail, porque dice que failure es sutatntivo
-    public class Result<D> {
-        private final boolean success;
-        private final String message;
-        private final D data;
-        private final DomainError domainError;
-
-        private Result(boolean success, String message, D data, DomainError domainError) {
-            this.success = success;
-            this.message = message;
-            this.data = data;
-            this.domainError = domainError;
-        }
-
-        public static <D> Result<D> success(D data) {
-            return new Result<>(true, "", data, null);
-        }
-
-        public static <D> Result<D> success(D data, String message) {
-            return new Result<>(true, message, data, null);
-        }
-
-        public static <D> Result<D> fail(String message) {
-            return new Result<>(false, message, null, null);
-        }
-
-        public static <D> Result<D> fail(DomainError domainError) {
-            return new Result<>(false, domainError.name(), null, domainError);
-        }
-
-        public boolean isSuccess() { return success; }
-        public boolean isFail() {return !success;}
-        public String getMessage() { return message; }
-        public D getData() { return data; }
-        public Optional<DomainError> getDomainError() { return Optional.ofNullable(domainError); }
-
-    }
-
 ojo revisar con chatcito
 --  Corregir la sitnexis en ingels                  exists by bar code <-- esto es corrrecto
                                                     exist by bar code <-- esto es incorrrecto
-
-Un detalle adicional: en tu update_phone_number() del servicio tienes un posible bug de lógica:
-
-if self._customer_repository.exists_by_phone_number(
-    PhoneNumber(new_phone_number)
-):
-    return Result.failure(
-        "Ya existe un cliente con el mismo número de teléfono."
-    )
-
-Si el cliente ya tiene ese mismo número, también devolverá error. Lo ideal sería validar que el teléfono pertenece a otro cliente antes de rechazarlo.
 
 para que pinses como solucionarlo: 
 product_name UNIQUE puede darte problemas
@@ -133,17 +79,6 @@ sin UNIQUE.
 
 -- pensar un mejor nombre para productimpl, la palabra impl lo hace ver feo xd
 
--- esto no tiene sentido, atrapar un expection que la documetacion indica que no saldra
-public static ProductIdImpl fromString(String value) throws DomainException {
-    try {
-        return new ProductIdImpl(UUID.fromString(value));
-    } catch (IllegalArgumentException e) {
-        throw new DomainException("El ID de product no tiene un formato válido: " + value);
-    } catch (Exception e) {
-        throw new UnexpectedDomainException(e.getMessage(), e);
-    }
-}
-
 -- pensar si es necesario que una entidad deberia conocer si un objeto el id de otro dominio o deberia conocerlo por atributo
 
 -- se deberia pasar el uuid como uuid y no hacer la transformacion a string.
@@ -156,4 +91,4 @@ public static ProductIdImpl fromString(String value) throws DomainException {
 
 -- se deberia agregar una bandera para los productos que son peresibles y asi poder obligar a ingresar un fecha de caducidad
 
--- el id deberia ser un value object osea heredar
+-- revisar los dto de pay, porque creo que deberia haber una de lectura y otro de escritura, una recibe datos crudos (para la creacion) y otro lo valueobjects para su lectura
