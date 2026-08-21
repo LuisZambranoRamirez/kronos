@@ -26,4 +26,9 @@ public class CustomerName extends ValueObject<String> implements CustomerId, Str
     public String getAttribute() {
         return getValue();
     }
+
+    @Override
+    public String asString() {
+        return getValue();
+    }
 }
