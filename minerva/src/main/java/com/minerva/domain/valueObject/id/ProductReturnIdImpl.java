@@ -25,4 +25,9 @@ public class ProductReturnIdImpl extends ValueObject<UUID> implements ProductRet
     public UUID getIdValue() {
         return getValue();
     }
+
+    @Override
+    public String asString() {
+        return getValue().toString();
+    }
 }

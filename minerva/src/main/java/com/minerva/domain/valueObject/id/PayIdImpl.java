@@ -25,4 +25,9 @@ public class PayIdImpl extends ValueObject<UUID> implements PayId {
     public UUID getIdValue() {
         return getValue();
     }
+
+    @Override
+    public String asString() {
+        return getValue().toString();
+    }
 }

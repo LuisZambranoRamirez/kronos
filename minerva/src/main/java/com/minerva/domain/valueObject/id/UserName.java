@@ -27,4 +27,9 @@ public final class UserName extends ValueObject<String> implements UserId, Strin
     public String getAttribute() {
         return getValue();
     }
+
+    @Override
+    public String asString() {
+        return getValue();
+    }
 }

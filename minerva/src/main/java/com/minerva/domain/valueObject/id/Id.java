@@ -2,4 +2,5 @@ package com.minerva.domain.valueObject.id;
 
 public interface Id<I> {
     I getIdValue();
+    String asString();
 }

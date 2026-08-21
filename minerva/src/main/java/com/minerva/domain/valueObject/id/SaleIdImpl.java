@@ -24,4 +24,9 @@ public class SaleIdImpl extends ValueObject<UUID> implements SaleId {
     public UUID getIdValue() {
         return getValue();
     }
+
+    @Override
+    public String asString() {
+        return getValue().toString();
+    }
 }

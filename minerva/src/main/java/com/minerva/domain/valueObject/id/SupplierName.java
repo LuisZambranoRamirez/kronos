@@ -20,4 +20,9 @@ public class SupplierName extends ValueObject<String> implements SupplierId {
     public String getIdValue() {
         return getValue();
     }
+
+    @Override
+    public String asString() {
+        return getValue();
+    }
 }

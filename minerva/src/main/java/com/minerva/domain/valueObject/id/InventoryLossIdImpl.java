@@ -25,4 +25,9 @@ public class InventoryLossIdImpl extends ValueObject<UUID> implements InventoryL
     public UUID getIdValue() {
         return getValue();
     }
+
+    @Override
+    public String asString() {
+        return getValue().toString();
+    }
 }

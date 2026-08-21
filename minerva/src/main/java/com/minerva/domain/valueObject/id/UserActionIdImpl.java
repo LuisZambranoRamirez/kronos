@@ -25,4 +25,9 @@ public class UserActionIdImpl extends ValueObject<UUID> implements UserActionId 
     public UUID getIdValue() {
         return getValue();
     }
+
+    @Override
+    public String asString() {
+        return getValue().toString();
+    }
 }
