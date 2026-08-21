@@ -1,23 +1,16 @@
-package com.minerva.domain.valueObject.id;
+package com.minerva.domain.valueObject;
 
-import com.minerva.domain.entities.customer.CustomerId;
 import com.minerva.domain.exceptions.InvalidDomainArgumentException;
-import com.minerva.domain.valueObject.ValueObject;
 
-public class CustomerName extends ValueObject<String> implements CustomerId {
+public class FullName extends ValueObject<String> {
     private static final int MIN_LENGTH = 3;
-    private static final int MAX_LENGTH = 50;
+    private static final int MAX_LENGTH = 100;
 
-    public CustomerName(String value) throws InvalidDomainArgumentException {
+    public FullName(String value) throws InvalidDomainArgumentException {
         super(value);
         if (value.isBlank()) throw new InvalidDomainArgumentException("El NOMBRE no puede estar vacío.");
         if (value.length() < MIN_LENGTH) throw new InvalidDomainArgumentException("El NOMBRE debe tener al menos " + MIN_LENGTH + " caracteres.");
         if (value.length() > MAX_LENGTH) throw new InvalidDomainArgumentException("El NOMBRE no puede exceder los " + MAX_LENGTH + " caracteres.");
         if (!value.matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ ]+$")) throw new InvalidDomainArgumentException("El NOMBRE solo debe contener letras.");
-    }
-
-    @Override
-    public String getIdValue() {
-        return getValue();
     }
 }

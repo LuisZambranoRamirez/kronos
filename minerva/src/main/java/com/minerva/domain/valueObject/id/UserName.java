@@ -11,7 +11,6 @@ public final class UserName extends ValueObject<String> implements UserId {
 
     public UserName(String value) throws InvalidDomainArgumentException {
         super(value);
-
         if (value.isBlank()) throw new InvalidDomainArgumentException("El USERNAME no puede estar vacío.");
         if (value.length() < MIN_LENGTH) throw new InvalidDomainArgumentException("El USERNAME debe tener al menos " + MIN_LENGTH + " caracteres.");
         if (value.length() > MAX_LENGTH) throw new InvalidDomainArgumentException("El USERNAME no puede exceder los " + MAX_LENGTH + " caracteres.");
