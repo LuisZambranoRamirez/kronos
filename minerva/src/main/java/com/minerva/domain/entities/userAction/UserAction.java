@@ -1,6 +1,7 @@
 package com.minerva.domain.entities.userAction;
 
 import java.time.LocalDateTime;
+import java.util.Map;
 
 import com.minerva.domain.constants.Permission;
 import com.minerva.domain.entities.Entity;
@@ -12,18 +13,18 @@ import com.minerva.domain.valueObject.id.UserName;
 public class UserAction extends Entity<UserActionId> {
     private final UserName userName;
     private final Permission permission;
-    private final Id<?> entityId;
+    private final Entity<?> entity;
     
     private final LocalDateTime registrationDate;
 
-    public UserAction(UserName userName, Permission permission, Id<?> entityId) throws NullValueException {
+    public UserAction(UserName userName, Permission permission, Entity<?> entity) throws NullValueException {
         if (permission == null) throw new NullValueException("El permiso no puede ser nulo.");
-        if (entityId == null) throw new NullValueException("El ID de la entidad no puede ser nulo.");
+        if (entity == null) throw new NullValueException("La entidad no puede ser nula.");
 
         super(UserActionIdImpl.generate());
         this.permission = permission;
         this.userName = userName;
-        this.entityId = entityId;
+        this.entity = entity;
         this.registrationDate = LocalDateTime.now();
     }
 
@@ -31,12 +32,20 @@ public class UserAction extends Entity<UserActionId> {
         return userName;
     }
 
+    public String getEntityName() {
+        return entity.getEntityName();
+    }
+
+    public Map<String, Value<?>> getAttributes() {
+        return entity.getAttributes();
+    }
+
     public Permission getPermission() {
         return permission;
     }
 
     public Id<?> getEntityId() {
-        return entityId;
+        return entity.getId();
     }
 
     public LocalDateTime getRegistrationDate() {
