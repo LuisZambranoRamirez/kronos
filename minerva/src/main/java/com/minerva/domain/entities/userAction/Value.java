@@ -1,4 +1,5 @@
 package com.minerva.domain.entities.userAction;
 
-public interface Value {
+public interface Value<V> {
+    V getValue();
 }

@@ -1,4 +1,4 @@
 package com.minerva.domain.entities.userAction;
 
-public interface Text extends Value<String> {
+public interface StringValue extends Value<String> {
 }
