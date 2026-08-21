@@ -1,6 +1,7 @@
 package com.minerva.domain.entities.userAction;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.Map;
 
 import com.minerva.domain.constants.Permission;
@@ -36,10 +37,6 @@ public class UserAction extends Entity<UserActionId> {
         return entity.getEntityName();
     }
 
-    public Map<String, Attribute<?>> getAttributes() {
-        return entity.getAttributes();
-    }
-
     public Permission getPermission() {
         return permission;
     }
@@ -48,7 +45,48 @@ public class UserAction extends Entity<UserActionId> {
         return entity.getId();
     }
 
+    public Map<String, Attribute<?>> getEntityData() {
+        return entity.getAttributes();
+    }
+
     public LocalDateTime getRegistrationDate() {
         return registrationDate;
+    }
+
+    @Override
+    public Map<String, Attribute<?>> getAttributes() {
+        Map<String, Attribute<?>> attributes = new HashMap<>();
+
+        attributes.put(
+                "userName",
+                userName
+        );
+
+        attributes.put(
+                "permission",
+                permission
+        );
+
+        attributes.put(
+                "entityName",
+                new DefaultStringAttribute(entity.getEntityName())
+        );
+
+        attributes.put(
+                "entityId",
+                new DefaultStringAttribute(entity.getId().asString())
+        );
+
+        attributes.put(
+                "entityData",
+                new DefaultStringAttribute(entity.getAttributes().toString())
+        );
+
+        attributes.put(
+                "registrationDate",
+                new DefaultDateTimeAttribute(registrationDate)
+        );
+
+        return attributes;
     }
 }
