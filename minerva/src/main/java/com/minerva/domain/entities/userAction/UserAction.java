@@ -36,7 +36,7 @@ public class UserAction extends Entity<UserActionId> {
         return entity.getEntityName();
     }
 
-    public Map<String, Value<?>> getAttributes() {
+    public Map<String, Attribute<?>> getAttributes() {
         return entity.getAttributes();
     }
 
