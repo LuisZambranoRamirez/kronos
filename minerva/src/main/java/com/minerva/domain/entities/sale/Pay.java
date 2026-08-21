@@ -11,6 +11,7 @@ import com.minerva.domain.valueObject.id.PayIdImpl;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 class Pay extends Entity<PayId> {
     private final Money amount;
@@ -29,10 +30,10 @@ class Pay extends Entity<PayId> {
         this.registrationDate = LocalDateTime.now();
     }
 
-    Pay(String payId, BigDecimal amount, PaymentMethod paymentMethod, LocalDateTime registrationDate) {
+    Pay(UUID payId, BigDecimal amount, PaymentMethod paymentMethod, LocalDateTime registrationDate) {
         PayIdImpl tempId;
         try {
-            tempId = PayIdImpl.generate();
+            tempId = new PayIdImpl(payId);
             this.amount = new Money(amount);
             this.paymentMethod = paymentMethod;
             this.registrationDate = registrationDate;
