@@ -132,6 +132,7 @@ CREATE TABLE user_action (
     user_name VARCHAR(30) NOT NULL,
     permission permission NOT NULL,
     entity_id TEXT NOT NULL,
+    entity_name TEXT NOT NULL,
     entity_data JSONB NOT NULL,
     registration_date TIMESTAMP NOT NULL,
 
