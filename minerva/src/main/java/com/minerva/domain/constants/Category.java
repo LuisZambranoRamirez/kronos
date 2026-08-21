@@ -1,6 +1,8 @@
 package com.minerva.domain.constants;
 
-public enum Category {
+import com.minerva.domain.entities.userAction.StringAttribute;
+
+public enum Category implements StringAttribute {
     BEBIDAS,
     ABARROTES_SECOS,
     CAFE_INFUSIONES,
@@ -11,5 +13,10 @@ public enum Category {
     LIMPIEZA_HOGAR,
     BEBES,
     MASCOTAS,
-    OTROS
+    OTROS;
+
+    @Override
+    public String getAttribute() {
+        return name();
+    }
 }

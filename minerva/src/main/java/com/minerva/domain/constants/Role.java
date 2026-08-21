@@ -1,8 +1,10 @@
 package com.minerva.domain.constants;
 
+import com.minerva.domain.entities.userAction.StringAttribute;
+
 import java.util.Set;
 
-public enum Role {
+public enum Role implements StringAttribute {
 
     ADMIN(Set.of(
             Permission.values()
@@ -50,5 +52,10 @@ public enum Role {
 
     public boolean lacksPermission(Permission permission) {
         return !hasPermission(permission);
+    }
+
+    @Override
+    public String getAttribute() {
+        return name();
     }
 }

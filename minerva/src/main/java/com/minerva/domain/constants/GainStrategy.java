@@ -1,5 +1,12 @@
 package com.minerva.domain.constants;
 
-public enum GainStrategy {
-    PORCENTAJE, RECARGO_FIJO
+import com.minerva.domain.entities.userAction.StringAttribute;
+
+public enum GainStrategy implements StringAttribute {
+    PORCENTAJE, RECARGO_FIJO;
+
+    @Override
+    public String getAttribute() {
+        return name();
+    }
 }

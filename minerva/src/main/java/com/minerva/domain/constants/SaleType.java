@@ -1,5 +1,12 @@
 package com.minerva.domain.constants;
 
-public enum SaleType {
-    UNIDAD, GRANEL
+import com.minerva.domain.entities.userAction.StringAttribute;
+
+public enum SaleType implements StringAttribute {
+    UNIDAD, GRANEL;
+
+    @Override
+    public String getAttribute() {
+        return name();
+    }
 }

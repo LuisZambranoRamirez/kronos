@@ -1,5 +1,12 @@
 package com.minerva.domain.constants;
 
-public enum ReasonProductReturn {
-    DAÑADO, VENCIDO, EQUIVOCACION, OTROS
+import com.minerva.domain.entities.userAction.StringAttribute;
+
+public enum ReasonProductReturn implements StringAttribute {
+    DAÑADO, VENCIDO, EQUIVOCACION, OTROS;
+
+    @Override
+    public String getAttribute() {
+        return name();
+    }
 }
