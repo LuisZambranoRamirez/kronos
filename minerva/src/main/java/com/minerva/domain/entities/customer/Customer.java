@@ -1,6 +1,7 @@
 package com.minerva.domain.entities.customer;
 
 import com.minerva.domain.entities.Entity;
+import com.minerva.domain.entities.userAction.Attribute;
 import com.minerva.domain.exceptions.EntityRestoreException;
 import com.minerva.domain.exceptions.InvalidDomainArgumentException;
 import com.minerva.domain.valueObject.PhoneNumber;
@@ -9,6 +10,7 @@ import com.minerva.domain.exceptions.DomainException;
 import com.minerva.domain.valueObject.id.CustomerName;
 
 import java.time.LocalDateTime;
+import java.util.Map;
 import java.util.Optional;
 
 public class Customer extends Entity<CustomerId> {
@@ -70,4 +72,8 @@ public class Customer extends Entity<CustomerId> {
         return registrationDate;
     }
 
+    @Override
+    public Map<String, Attribute<?>> getAttributes() {
+        return Map.of();
+    }
 }
