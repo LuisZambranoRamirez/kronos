@@ -1,8 +1,9 @@
 package com.minerva.domain.valueObject;
 
 import com.minerva.domain.exceptions.InvalidDomainArgumentException;
+import com.minerva.domain.entities.userAction.StringAttribute;
 
-public class Observation extends ValueObject<String> {
+public class Observation extends ValueObject<String> implements StringAttribute {
 
     private static final int MAX_LENGTH = 250;
 
@@ -20,6 +21,11 @@ public class Observation extends ValueObject<String> {
                             + MAX_LENGTH + " caracteres."
             );
         }
+    }
+
+    @Override
+    public String getAttribute() {
+        return getValue();
     }
 
 }

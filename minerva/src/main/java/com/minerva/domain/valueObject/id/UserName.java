@@ -3,8 +3,9 @@ package com.minerva.domain.valueObject.id;
 import com.minerva.domain.entities.user.UserId;
 import com.minerva.domain.exceptions.InvalidDomainArgumentException;
 import com.minerva.domain.valueObject.ValueObject;
+import com.minerva.domain.entities.userAction.StringAttribute;
 
-public final class UserName extends ValueObject<String> implements UserId {
+public final class UserName extends ValueObject<String> implements UserId, StringAttribute {
 
     private static final int MIN_LENGTH = 3;
     private static final int MAX_LENGTH = 30;
@@ -19,6 +20,11 @@ public final class UserName extends ValueObject<String> implements UserId {
 
     @Override
     public String getIdValue() {
+        return getValue();
+    }
+
+    @Override
+    public String getAttribute() {
         return getValue();
     }
 }

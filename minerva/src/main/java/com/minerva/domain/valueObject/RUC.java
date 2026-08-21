@@ -1,8 +1,9 @@
 package com.minerva.domain.valueObject;
 
+import com.minerva.domain.entities.userAction.StringAttribute;
 import com.minerva.domain.exceptions.InvalidDomainArgumentException;
 
-public class RUC extends ValueObject<String> {
+public class RUC extends ValueObject<String> implements StringAttribute {
     private static final int LENGTH = 11;
 
     public RUC(String value) throws InvalidDomainArgumentException {
@@ -10,6 +11,11 @@ public class RUC extends ValueObject<String> {
 
         if (value.length() != LENGTH) throw new InvalidDomainArgumentException("El RUC debe tener exactamente " + LENGTH + " caracteres.");
         if (!value.matches("^\\d+$")) throw new InvalidDomainArgumentException("El RUC debe contener solo números.");
+    }
+
+    @Override
+    public String getAttribute() {
+        return getValue();
     }
 
 }

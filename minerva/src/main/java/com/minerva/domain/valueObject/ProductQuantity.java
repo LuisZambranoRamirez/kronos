@@ -1,12 +1,13 @@
 package com.minerva.domain.valueObject;
 
+import com.minerva.domain.entities.userAction.NumericAttribute;
 import com.minerva.domain.exceptions.InvalidDomainArgumentException;
 import com.minerva.domain.exceptions.MinimumAmountException;
 import com.minerva.domain.exceptions.UnexpectedDomainException;
 
 import java.math.BigDecimal;
 
-public class ProductQuantity extends ValueObject<BigDecimal> {
+public class ProductQuantity extends ValueObject<BigDecimal> implements NumericAttribute {
     // DECIMAL(10,3)
     private static final BigDecimal MIN_AMOUNT = BigDecimal.ZERO;
     private static final int MAX_DECIMALS = 3;
@@ -80,6 +81,11 @@ public class ProductQuantity extends ValueObject<BigDecimal> {
 
     public boolean isInteger() {
         return getValue().scale() == 0;
+    }
+
+    @Override
+    public BigDecimal getAttribute() {
+        return getValue();
     }
 
 }

@@ -1,9 +1,10 @@
 package com.minerva.domain.valueObject;
 
 import com.minerva.domain.exceptions.InvalidDomainArgumentException;
+import com.minerva.domain.entities.userAction.StringAttribute;
 
 // MEJORAS: Los regex
-public class PhoneNumber extends ValueObject<String> {
+public class PhoneNumber extends ValueObject<String> implements StringAttribute {
     private static final int LENGTH = 9;
 
     public PhoneNumber(String value) throws InvalidDomainArgumentException {
@@ -11,6 +12,11 @@ public class PhoneNumber extends ValueObject<String> {
 
         if (value.length() != LENGTH) throw new InvalidDomainArgumentException("El número de teléfono debe tener " + LENGTH + " dígitos.");
         if (!value.matches("^\\d+$")) throw new InvalidDomainArgumentException("El número de teléfono solo puede contener números.");
+    }
+
+    @Override
+    public String getAttribute() {
+        return getValue();
     }
 
 }

@@ -2,11 +2,12 @@ package com.minerva.domain.valueObject;
 
 import com.minerva.domain.exceptions.InvalidDomainArgumentException;
 import com.minerva.domain.exceptions.MinimumAmountException;
+import com.minerva.domain.entities.userAction.NumericAttribute;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class Percentage extends ValueObject<BigDecimal> {
+public class Percentage extends ValueObject<BigDecimal> implements NumericAttribute {
     private static final BigDecimal MIN_VALUE = BigDecimal.ZERO;
 
 
@@ -37,6 +38,11 @@ public class Percentage extends ValueObject<BigDecimal> {
         return value
                 .multiply(getValue())
                 .divide(BigDecimal.valueOf(100), value.scale(), RoundingMode.HALF_UP);
+    }
+
+    @Override
+    public BigDecimal getAttribute() {
+        return getValue();
     }
 
 }
